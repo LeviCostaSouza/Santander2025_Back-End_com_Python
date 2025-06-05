@@ -9,7 +9,7 @@ router = APIRouter()
 @router.post(
     '/',
     summary='Criar uma nova Categoria',
-    status_code=status.HTTP_201_CREATED
+    status_code=status.HTTP_201_CREATED,
     response_model=CategoriaOut,
 )
 async def post(
@@ -18,4 +18,6 @@ async def post(
 ) -> CategoriaOut:
     
     categoria_out = CategoriaOut(id=uuid4(), **categoria_in.model_dump())
-    breakpoint
+    categoria_model = categoria_model(**categoria_out.model_dump())
+    breakpoint()
+    pass
