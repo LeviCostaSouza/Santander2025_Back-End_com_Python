@@ -1,8 +1,18 @@
-# Vivo-Python-AI-Backend-Developer
- Bootcamp Coding The Future Vivo - Python AI Backend Developer
+# Bootcamp Santander 2025 - Back-End com Python
 
-Aprendendo a codar com uma linguagem dinâmica, de sintaxe simplificada e muito poderosa!
+Bem-vindo ao repositório do Bootcamp Santander 2025 focado em desenvolvimento Back-End com Python! Este projeto é parte do programa de formação oferecido pelo Santander, que visa capacitar desenvolvedores para o mercado de trabalho.
 
-Com conteúdo atualizado e completamente inédito na plataforma DIO, estudando funções de Python com estrutura de dados, estou dando os primeiros passos em conceitos importantes de orientação a objetos (POO), além de aprender a integrar esse conhecimento ao framework Fast API e LangChain para aprofundar desenvolvimento web construindo APIs a partir da metodologia de testes unitários com TDD.
+## Sobre o Bootcamp
 
-Nesta trilha, estou a desenvolver minhas habilidades com projetos práticos, desafios de códigos e mentorias com experts da DIO e, além disso, tenho a oportunidade de ficar disponível na Talent Match para tech recrutadores de empresas parceiras que procuram profissionais com esse perfil.
+O Bootcamp Santander 2025 é um programa intensivo que oferece uma imersão em tecnologias de desenvolvimento Back-End, com foco em Python. Durante o curso, os participantes aprenderão sobre:
+
+- Fundamentos de programação em Python
+- Desenvolvimento de APIs RESTful
+- Banco de dados relacionais e não relacionais
+- Autenticação e autorização de usuários
+- Testes e documentação de código
+- Melhores práticas de desenvolvimento ágil
+
+## Objetivos do Projeto
+
+O objetivo deste repositório é compartilhar o conhecimento adquirido durante o bootcamp e fornecer exemplos práticos de projetos desenvolvidos ao longo do curso.
