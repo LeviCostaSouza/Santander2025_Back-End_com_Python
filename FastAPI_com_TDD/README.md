@@ -64,7 +64,7 @@ Antes de começar, certifique-se de ter instalado:
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/FastAPI_com_TDD.git
+git clone https://github.com/LeviCostaSouza/Santander2025_Back-End_com_Python/tree/main/FastAPI_com_TDD
 cd FastAPI_com_TDD
 ```
 
