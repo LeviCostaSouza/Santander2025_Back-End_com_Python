@@ -1,189 +1,241 @@
-# TDD Project
+# 🛒 Store API - FastAPI com TDD
 
-## O que é TDD?
-TDD é uma sigla para `Test Driven Development`, ou Desenvolvimento Orientado a Testes. A ideia do TDD é que você trabalhe em ciclos.
+[![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-7.0+-green.svg)](https://www.mongodb.com/)
+[![Poetry](https://img.shields.io/badge/Poetry-1.6+-orange.svg)](https://python-poetry.org/)
 
-### Ciclo do TDD
-![C4](/docs/img/img-tdd.png)
+Uma API RESTful moderna para gerenciamento de loja construída com **FastAPI** seguindo a metodologia **TDD (Test-Driven Development)**. Projeto desenvolvido durante o bootcamp da **Digital Innovation One (DIO)**.
 
-### Vantagens do TDD
-- entregar software de qualidade;
-- testar procurando possíveis falhas;
-- criar testes de integração, testes isolados (unitários);
-- evitar escrever códigos complexos ou que não sigam os pré-requisitos necessários;
+## 🚀 Características
 
-A proposta do TDD é que você codifique antes mesmo do código existir, isso nos garante mais qualidade no nosso projeto. Além de que, provavelmente se você deixar pra fazer os testes no final, pode acabar não fazendo. Com isso, sua aplicação perde qualidade e está muito mais propensa a erros.
+- ✅ **API REST** completa com FastAPI
+- ✅ **TDD (Test-Driven Development)** - Desenvolvimento orientado a testes
+- ✅ **MongoDB** como banco de dados NoSQL
+- ✅ **Pydantic** para validação de dados
+- ✅ **Poetry** para gerenciamento de dependências
+- ✅ **Documentação automática** com Swagger/OpenAPI
+- ✅ **Async/Await** para operações assíncronas
+- ✅ **Configurações com variáveis de ambiente**
 
-# Store API
-## Resumo do projeto
-Este documento traz informações do desenvolvimento de uma API em FastAPI a partir do TDD.
+## 🛠️ Tecnologias Utilizadas
 
-## Objetivo
-Essa aplicação tem como objetivo principal trazer conhecimentos sobre o TDD, na prática, desenvolvendo uma API com o Framework Python, FastAPI. Utilizando o banco de dados MongoDB, para validações o Pydantic, para os testes Pytest e entre outras bibliotecas.
+| Tecnologia | Versão | Descrição |
+|------------|--------|-----------|
+| Python | 3.12+ | Linguagem de programação |
+| FastAPI | 0.104+ | Framework web moderno |
+| MongoDB | 7.0+ | Banco de dados NoSQL |
+| Motor | 3.3+ | Driver assíncrono para MongoDB |
+| Pydantic | 2.5+ | Validação de dados |
+| Pytest | 7.4+ | Framework de testes |
+| Poetry | 1.6+ | Gerenciamento de dependências |
 
-## O que é?
-Uma aplicação que:
-- tem fins educativos;
-- permite o aprendizado prático sobre TDD com FastAPI + Pytest;
-
-## O que não é?
-Uma aplicação que:
-- se comunica com apps externas;
-
-
-## Solução Proposta
-Desenvolvimento de uma aplicação simples a partir do TDD, que permite entender como criar tests com o `pytest`. Construindo testes de Schemas, Usecases e Controllers (teste de integração).
-
-### Arquitetura
-|![C4](/docs/img/store.drawio.png)|
-|:--:|
-| Diagrama de C4 da Store API |
-
-### Banco de dados - MongoDB
-|![C4](/docs/img/product.drawio.png)|
-|:--:|
-| Database - Store API |
-
-
-## StoreAPI
-### Diagramas de sequência para o módulo de Produtos
-#### Diagrama de criação de produto
-
-```mermaid
-sequenceDiagram
-    title Create Product
-    Client->>+API: Request product creation
-    Note right of Client: POST /products
-
-    API->>API: Validate body
-
-    alt Invalid body
-        API->Client: Error Response
-        Note right of Client: Status Code: 422 - Unprocessable Entity
-    end
-
-    API->>+Database: Request product creation
-    alt Error on insertion
-        API->Client: Error Response
-        note right of Client: Status Code: 500 - Internal Server Error
-        end
-    Database->>-API: Successfully created
-
-    API->>-Client: Successful Response
-    Note right of Client: Status Code: 201 - Created
+## 📁 Estrutura do Projeto
 
 ```
-#### Diagrama de listagem de produtos
-
-```mermaid
-sequenceDiagram
-    title List Products
-    Client->>+API: Request products list
-    Note right of Client: GET /products
-
-    API->>+Database: Request products list
-
-    Database->>-API: Successfully queried
-
-    API->>-Client: Successful Response
-    Note right of Client: Status Code: 200 - Ok
+FastAPI_com_TDD/
+├── 📂 store/                 # Código principal da aplicação
+│   ├── 📂 core/             # Configurações e settings
+│   │   └── config.py        # Configurações da aplicação
+│   ├── 📂 controllers/      # Controladores/Routers
+│   ├── 📂 schemas/          # Modelos Pydantic
+│   ├── 📂 usecases/         # Lógica de negócio
+│   ├── __init__.py
+│   └── main.py              # Ponto de entrada da aplicação
+├── 📂 tests/                # Testes automatizados
+├── 📂 docs/                 # Documentação
+├── .env                     # Variáveis de ambiente
+├── docker-compose.yml       # Configuração Docker
+├── Makefile                 # Scripts de automação
+├── pyproject.toml          # Configuração do Poetry
+└── README.md               # Este arquivo
 ```
 
-#### Diagrama de detalhamento de um produto
+## 🔧 Pré-requisitos
 
-```mermaid
-sequenceDiagram
-    title Get Product
-    Client->>+API: Request product
-    Note right of Client: GET /products/{id}<br/> Path Params:<br/>    - id: <id>
+Antes de começar, certifique-se de ter instalado:
 
-    API->>+Database: Request product
-    alt Error on query
-        API->Client: Error Response
-        Note right of Client: Status Code: 500 - Internal Server Error
-    else Product not found
-        API->Client: Error Response
-        Note right of Client: Status Code: 404 - Not Found
-        end
+- [Python 3.12+](https://www.python.org/downloads/)
+- [Poetry](https://python-poetry.org/docs/#installation)
+- [MongoDB](https://www.mongodb.com/try/download/community) (local ou Docker)
+- [Git](https://git-scm.com/downloads)
 
-    Database->>-API: Successfully queried
+## 🚀 Instalação e Configuração
 
-    API->>-Client: Successful Response
-    Note right of Client: Status Code: 200 - Ok
-```
-#### Diagrama de atualização de produto
-
-```mermaid
-sequenceDiagram
-    title PUT Product
-    Client->>+API: Request product update
-    Note right of Client: PUT /products/{id}<br/> Path Params:<br/>    - id: <id>
-
-    API->>API: Validate body
-
-    alt Invalid body
-        API->Client: Error Response
-        Note right of Client: Status Code: 422 - Unprocessable Entity
-    end
-
-    API->>+Database: Request product
-    alt Product not found
-        API->Client: Error Response
-        Note right of Client: Status Code: 404 - Not Found
-        end
-
-    Database->>-API: Successfully updated
-
-    API->>-Client: Successful Response
-    Note right of Client: Status Code: 200 - Ok
+### 1. Clone o repositório
+```bash
+git clone https://github.com/seu-usuario/FastAPI_com_TDD.git
+cd FastAPI_com_TDD
 ```
 
-#### Diagrama de exclusão de produto
+### 2. Configure o ambiente virtual com Poetry
+```bash
+# Instalar dependências
+poetry install
 
-```mermaid
-sequenceDiagram
-    title Delete Product
-    Client->>+API: Request product delete
-    Note right of Client: DELETE /products/{id}<br/> Path Params:<br/>    - id: <id>
-
-    API->>+Database: Request product
-    alt Product not found
-        API->Client: Error Response
-        Note right of Client: Status Code: 404 - Not Found
-        end
-
-    Database->>-API: Successfully deleted
-
-    API->>-Client: Successful Response
-    Note right of Client: Status Code: 204 - No content
+# Ativar o ambiente virtual
+poetry shell
 ```
 
-## Desafio Final
-- Create
-    - Mapear uma exceção, caso dê algum erro de inserção e capturar na controller
-- Update
-    - Modifique o método de patch para retornar uma exceção de Not Found, quando o dado não for encontrado
-    - a exceção deve ser tratada na controller, pra ser retornada uma mensagem amigável pro usuário
-    - ao alterar um dado, a data de updated_at deve corresponder ao time atual, permitir modificar updated_at também
-- Filtros
-    - cadastre produtos com preços diferentes
-    - aplique um filtro de preço, assim: (price > 5000 and price < 8000)
+### 3. Configure as variáveis de ambiente
+Crie um arquivo `.env` na raiz do projeto:
+```bash
+DATABASE_URL=mongodb://localhost:27017/store?uuidRepresentation=standard
+```
 
-## Preparar ambiente
+### 4. Execute a aplicação
+```bash
+# Usando Poetry
+poetry run uvicorn store.main:app --reload
 
-Vamos utilizar Pyenv + Poetry, link de como preparar o ambiente abaixo:
+# Ou usando Makefile
+make run
 
-[poetry-documentation](https://github.com/nayannanara/poetry-documentation/blob/master/poetry-documentation.md)
+# Ou diretamente
+uvicorn store.main:app --reload
+```
 
-## Links uteis de documentação
-[mermaid](https://mermaid.js.org/)
+A aplicação estará disponível em: `http://127.0.0.1:8000`
 
-[pydantic](https://docs.pydantic.dev/dev/)
+## 📚 Documentação da API
 
-[validatores-pydantic](https://docs.pydantic.dev/latest/concepts/validators/)
+Após iniciar a aplicação, acesse:
 
-[model-serializer](https://docs.pydantic.dev/dev/api/functional_serializers/#pydantic.functional_serializers.model_serializer)
+- **Swagger UI**: `http://127.0.0.1:8000/docs`
+- **ReDoc**: `http://127.0.0.1:8000/redoc`
+- **OpenAPI JSON**: `http://127.0.0.1:8000/openapi.json`
 
-[mongo-motor](https://motor.readthedocs.io/en/stable/)
+## 🧪 Executando os Testes
 
-[pytest](https://docs.pytest.org/en/7.4.x/)
+```bash
+# Executar todos os testes
+pytest
+
+# Executar com coverage
+pytest --cov=store
+
+# Executar testes específicos
+pytest tests/test_main.py
+
+# Executar em modo watch (re-executa quando arquivos mudam)
+pytest --watch
+```
+
+## 🐳 Docker
+
+### Usando Docker Compose (Recomendado)
+```bash
+# Subir todos os serviços (API + MongoDB)
+docker-compose up -d
+
+# Ver logs
+docker-compose logs -f
+
+# Parar serviços
+docker-compose down
+```
+
+### Usando Docker manualmente
+```bash
+# Build da imagem
+docker build -t fastapi-store .
+
+# Executar container
+docker run -d -p 8000:8000 --env-file .env fastapi-store
+```
+
+## 🔄 Metodologia TDD
+
+Este projeto segue a metodologia **Test-Driven Development**:
+
+1. **🔴 Red**: Escrever um teste que falha
+2. **🟢 Green**: Implementar código mínimo para o teste passar
+3. **🔵 Refactor**: Melhorar o código mantendo os testes
+
+### Exemplo de fluxo TDD:
+```bash
+# 1. Escrever teste
+pytest tests/test_product.py::test_create_product -v
+
+# 2. Implementar funcionalidade
+# Editar store/usecases/product.py
+
+# 3. Executar teste novamente
+pytest tests/test_product.py::test_create_product -v
+
+# 4. Refatorar se necessário
+```
+
+## 📊 Endpoints Principais
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET | `/` | Health check da API |
+| GET | `/products` | Listar todos os produtos |
+| POST | `/products` | Criar novo produto |
+| GET | `/products/{id}` | Buscar produto por ID |
+| PUT | `/products/{id}` | Atualizar produto |
+| DELETE | `/products/{id}` | Deletar produto |
+
+## 🤝 Contribuindo
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📝 Scripts Úteis
+
+```bash
+# Instalar dependências
+make install
+
+# Executar aplicação
+make run
+
+# Executar testes
+make test
+
+# Executar linting
+make lint
+
+# Formatar código
+make format
+```
+
+## 🐛 Solução de Problemas
+
+### Erro de DATABASE_URL
+```bash
+# Verifique se o arquivo .env existe e tem a DATABASE_URL
+cat .env
+
+# Ou defina manualmente
+export DATABASE_URL="mongodb://localhost:27017/store"
+```
+
+### MongoDB não conecta
+```bash
+# Verifique se o MongoDB está rodando
+mongosh
+
+# Ou inicie com Docker
+docker run -d -p 27017:27017 --name mongodb mongo:latest
+```
+
+## 👥 Autor
+
+**Levi Costa**
+- GitHub: [@LeviCostaSouza](https://github.com/LeviCostaSouza)
+- LinkedIn: [Levi Costa](https://www.linkedin.com/in/levicostta)
+
+## 🎓 Agradecimentos
+
+- [Digital Innovation One (DIO)](https://digitalinnovation.one/) - Pelo bootcamp e projeto base
+- [FastAPI](https://fastapi.tiangolo.com/) - Framework incrível
+- Comunidade Python - Por todo suporte e documentação
+
+---
+
+⭐ **Se este projeto te ajudou, deixe uma estrela!** ⭐
