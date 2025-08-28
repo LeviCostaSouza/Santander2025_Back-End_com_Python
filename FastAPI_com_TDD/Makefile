@@ -6,3 +6,6 @@ precommit-install:
 
 precommit-run:
 	@poetry run pre-commit run
+
+test:
+	@poetry run pytest
