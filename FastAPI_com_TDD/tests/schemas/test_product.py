@@ -3,10 +3,10 @@ from pydantic import ValidationError
 
 import pytest
 from store.schemas.product import ProductIn
-from store.tests.factories import product_data
+from tests.factories import product_data
 
 
-def test_schemas_success():
+def test_schemas__return_success():
     data = product_data()
     product = ProductIn.model_validate(data)
 
