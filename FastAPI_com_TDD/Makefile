@@ -4,8 +4,8 @@ run:
 precommit-install:
 	@poetry run pre-commit install
 
-precommit-run:
-	@poetry run pre-commit run
-
 test:
 	@poetry run pytest
+
+test-matching:
+	@poetry run pytest -s -rx -k $(K) --pdb store ./tests/
